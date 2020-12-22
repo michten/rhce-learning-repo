@@ -1,0 +1,1 @@
+ansible all -m user -a 'name=automation state=absent remove=yes' -u root -k

@@ -1,0 +1,3 @@
+ansible all -m user -a 'name=automation state=present' -u root -k
+ansible all -m authorized_key -a "user=automation key='{{ lookup('file','~/.ssh/id_rsa.pub') }}'" -u root -k
+ansible all -m copy -a "content='automation   ALL=(ALL)   NOPASSWD: ALL' dest=/etc/sudoers.d/automation mode=0440" -u root -k

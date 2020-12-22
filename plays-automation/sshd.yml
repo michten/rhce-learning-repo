@@ -1,0 +1,33 @@
+---
+- name: configure sshd server
+  hosts: all
+  become: yes
+  tasks:
+          - name: modify sshd_config file for MaxAuthTries
+            lineinfile:
+                    path: /etc/ssh/sshd_config
+                    line: "MaxAuthTries 3"
+                    regexp: "^MaxAuthTries"
+                    insertafter: "^#MaxAuthTries"
+                    state: present
+          
+          - name: modify sshd_config file for banner
+            lineinfile:
+                    path: /etc/ssh/sshd_config
+                    line: "Banner /etc/motd"
+                    regexp: "^Banner"
+                    insertafter: "^#Banner"
+                    state: present
+          
+          - name: modify sshd_config file for X11Forwarding
+            lineinfile:
+                    path: /etc/ssh/sshd_config
+                    line: "X11Forwarding no"
+                    regexp: "^X11Forwarding"
+                    insertafter: "^#X11Forwarding"
+                    state: present
+          
+          - name: reload sshd service
+            service:
+                    name: sshd
+                    state: reloaded

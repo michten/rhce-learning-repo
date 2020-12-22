@@ -1,0 +1,19 @@
+---
+- name: create users and groups from file with vault
+  hosts: webserver
+  become: yes
+  vars_files:
+          - ./vars/user_list.yml
+          - ./secrets.yml
+  tasks:
+          - name: add user
+            user:
+                    name: "{{ users.username }}"
+                    uid: "{{ users.uid }}"
+                    groups: wheel
+                    append: yes
+                    password: "{{ item.user_password | password_hash('sha512') }}"
+                    shell: /bin/bash
+            loop: "{{ users }}"
+            #when: users['uid']  == "1201"
+

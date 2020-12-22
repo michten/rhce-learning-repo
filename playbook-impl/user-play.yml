@@ -1,0 +1,9 @@
+---
+- name: create devops-test user
+  hosts: allnodes
+  tasks:
+          - name: new user creation
+            user:
+                    name: devops-test
+                    uid: 1111
+                    state: present

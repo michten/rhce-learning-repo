@@ -1,0 +1,12 @@
+---
+- name: add devops pub key to automation user
+  remote_user: root
+  hosts:
+          - node1
+          - node2
+  tasks:
+    - name: add devops pub key for automation user
+      authorized_key:
+        user: automation
+        key: "{{ lookup('file', '/home/devops/.ssh/id_rsa.pub') }}"
+        state: present

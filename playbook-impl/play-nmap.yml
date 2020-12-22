@@ -1,0 +1,8 @@
+---
+- name: nmap installation
+  hosts: allnodes
+  tasks:
+          - name: yum nmap installation
+            yum:
+                    name: nmap
+                    state: latest

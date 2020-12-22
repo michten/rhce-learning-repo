@@ -1,0 +1,34 @@
+---
+- name: better loop play
+  hosts: node1
+  vars:
+    this_variables:
+      #one: this is one
+      #list:
+        - list-1
+        - list-2
+  tasks:
+    - name: task with loop, vars in play
+      command: echo {{ item }}
+      loop: "{{ this_variables }}"
+
+    - name: sec task with loop, list in loop
+      command: echo {{ item }}
+      loop:
+        - in loop one
+        - in loop two
+        - in loop three
+
+    - name: 3th task with loop, sophisc vars
+      command: echo user {{ item.name }} has uid {{ item.uid }}
+      loop:
+        - name: john
+          uid: 8888
+        - name: borat
+          uid: 9999
+      register: soph_echo_stout
+
+    - name: show what last task print
+      debug:
+        #msg: "{{ soph_echo_stout }}"
+         var: soph_echo_stout

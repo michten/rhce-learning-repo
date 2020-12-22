@@ -1,0 +1,23 @@
+---
+- name: create local facts
+  hosts: node1
+  become: yes
+  tasks:
+    - name: create /etc/ansible/fact.d/ dir
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+
+    - name: create a test.fact
+      copy:
+        content: |
+          [users]
+          user_1=first_user
+          user_2=sec_user
+
+          [pkgs]
+          pkg_1=nmap
+          pkg_2=tmux
+        dest: /etc/ansible/facts.d/test.fact
+
+

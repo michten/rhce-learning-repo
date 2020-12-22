@@ -1,0 +1,11 @@
+---
+- name: my test installation playbook
+  hosts: all
+  become: yes
+  tasks:
+          - name: yum installation of nmap and tmux
+            yum:
+                    name:
+                            - nmap
+                            - tmux
+                    state: latest

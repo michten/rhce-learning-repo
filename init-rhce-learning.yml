@@ -1,0 +1,18 @@
+---
+- name: initial setup for rhce learning repo
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: print some stuf
+      shell: id
+      register: id_var
+    - name: hostname
+      debug:
+        var: ansible_facts['hostname'], id_var
+
+
+
+        #create ansible_users group
+        #create folder rhce-learning-repo ??? or will be created by git clone
+        #set ansible_users ownership and rest for /rhce-learning-repo
+        #set guid for /rhce-learning-repo

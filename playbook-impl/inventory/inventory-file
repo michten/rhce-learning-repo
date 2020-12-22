@@ -1,0 +1,17 @@
+#[myself]
+#localhost  	ansible_connection=local
+
+[raz]
+node1
+node2
+
+[dwa]
+node3
+node4
+
+[allnodes:children]
+raz
+dwa
+
+[repository]
+repo

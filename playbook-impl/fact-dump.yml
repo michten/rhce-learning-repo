@@ -1,0 +1,17 @@
+---
+- name: fact dump
+  hosts: node1
+  tasks:
+    - name: print facts
+      debug:
+        var: group_names, inventory_hostname, ansible_facts['hostname']
+        #var: {{ group_names, inventory_hostname, ansible_facts['hostname'] }}
+        #var: group_names, inventory_hostname, ansible_facts['hostname']
+        #var: inventory_hostname
+        #var: groups
+        #var: ansible_facts
+        #var: "{{ ansible_facts['hostname'], ansible_facts['fqdn'] }}"
+        #var: ansible_facts['hostname'], ansible_facts['fqdn']
+        #var: ansible_facts['hostname']
+        #     ansible_facts['fqdn']
+        #var: ansible_facts['hostname']

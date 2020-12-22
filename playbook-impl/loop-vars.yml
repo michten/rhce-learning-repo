@@ -1,0 +1,28 @@
+---
+- name: loop with vars
+  hosts: localhost
+  vars:
+    one:
+      - list_one_1
+      - list_one_2
+    two:
+      - list_two_1
+      - list_two_2
+    three:
+      in_three:
+        - list_inthree_1
+        - list_inthree_2
+  tasks:
+    - name: task echo
+      shell: echo This is e command and var- {{ item }}
+      loop: "{{ one }}"
+      register: stdout_of_task
+
+    - name: task debug- print last command output
+      debug:
+        msg: this is msg-item "{{ item['stdout'] }}"
+      loop: "{{ stdout_of_task['results'] }}"
+
+#   - name: task debug- print last command output
+#     debug:
+#       var: stdout_of_task

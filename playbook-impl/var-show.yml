@@ -1,0 +1,11 @@
+---
+- name: print vars
+  hosts: node1
+  tasks:
+    - name: print var
+      debug:
+        var: ansible_local
+        #var: ansible_facts['ansible_local']['test']
+        #var: ansible_facts['dupa']
+        #var: ansible_facts['ansible_local']
+        #var: ansible_facts.ansible_local

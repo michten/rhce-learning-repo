@@ -1,0 +1,17 @@
+bezgrupy1.com
+
+[groupone]
+hostname.com
+
+[grouptwo]
+db[b:e].com
+
+[groupthree]
+172.25.250.[9:26]
+
+[mix:children]
+groupone
+grouptwo
+
+[ungrouped]
+nogroup2.com

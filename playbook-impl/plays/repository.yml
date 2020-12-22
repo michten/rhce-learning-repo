@@ -1,0 +1,11 @@
+---
+- name: setup yum repositories
+  hosts: allnodes
+  tasks:
+          - name: enable repos
+            yum_repository:
+                    name: rpms
+                    description: This is the main repo file
+                    baseurl:
+                            - http://repo.ansi.example.com/AppStream
+                            - http://repo.ansi.example.com/BaseOS

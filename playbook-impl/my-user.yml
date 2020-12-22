@@ -1,0 +1,32 @@
+---
+- name: create user and add ssh key
+  hosts:
+          - allnodes
+          - localhost
+  vars:
+         ansible_connection: local
+  become: yes
+  tasks:
+          - name: create user
+            user:
+               name: myadminuser
+               uid: 1239
+               state: present
+               append: yes
+               groups: wheel
+               password: "{{ 'a' | password_hash('sha512') }}"
+
+
+               #          - name: alternative add key to authorized_keys
+               #            authorized_key:
+               #                   user: admin
+               #                   key: "{{ item }}"
+               #                   with_file:
+               #                     - ./keys/admin.pub
+
+          - name: add key to authorized_keys
+            authorized_key:
+                    user: admin
+                    state: present
+                    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+

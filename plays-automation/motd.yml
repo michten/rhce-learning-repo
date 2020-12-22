@@ -1,0 +1,27 @@
+---
+- name: Configure motd
+  become: yes
+  hosts: all:&proxy
+  tasks:
+          - name: edit motd
+            copy:
+                    content: "Welcome to HAProxy server\n"
+                    dest: /etc/motd
+
+- name: Configure motd
+  become: yes
+  hosts: all:&webserver
+  tasks:
+          - name: edit motd
+            copy:
+                    content: "Welcome to Apache\n"
+                    dest: /etc/motd
+
+- name: Configure motd
+  become: yes
+  hosts: all:&database
+  tasks:
+          - name: edit motd
+            copy:
+                    content: "Welcome to MySQL\n"
+                    dest: /etc/motd

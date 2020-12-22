@@ -1,0 +1,34 @@
+---
+- name: register test
+  hosts: node1
+  tasks:
+    - name: 
+      command: id
+      register: command_output
+
+    - name: debug
+      debug:
+        var: command_output
+
+    - name: debug var no braces
+      debug:
+        #msg: "{{ groups }}"
+        #msg: "{{ group_names }}"
+        #msg: "{{ inventory_hostname }}"
+        #msg: "{{ ansible_facts }}"
+        #msg: "{{ ansible_facts['devices']['sda']['size'] }}"
+        #msg: "{{ hostvars }}"
+        #msg: "{{ hostvars['node1']['inventory_hostname'] }}"
+        var: hostvars['node1']['inventory_hostname'], hostvars['node2']['inventory_hostname']
+
+    - name: debug var with braces
+      debug:
+        var: "{{ hostvars['node1']['inventory_hostname'], hostvars['node2']['inventory_hostname'] }}"
+
+    - name: debug msg no braces
+      debug:
+        msg: hostvars['node1']['inventory_hostname'], hostvars['node2']['inventory_hostname']
+
+    - name: debug msg with braces
+      debug:
+        msg: "{{ hostvars['node1']['inventory_hostname'], hostvars['node2']['inventory_hostname'] }}"

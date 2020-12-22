@@ -1,0 +1,14 @@
+---
+- name: loop test play
+  hosts: node1
+  vars:
+    to_check:
+      - ansible_local
+      - group_names
+    another:
+      - hostvars
+  tasks:
+    - name: print vars
+      debug:
+        var: "{{ item }}"
+      loop: "{{ to_check }}, {{ another }}"
